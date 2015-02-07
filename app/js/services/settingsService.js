@@ -21,7 +21,7 @@
         function get(key) {
             var defer = $q.defer();
 
-            if (localStorage.hasOwnProperty(key)) {
+            if (localStorage) {
                 defer.resolve(localStorage[key]);
             } else {
                 defer.reject();

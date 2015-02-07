@@ -15,7 +15,8 @@
             getStocks: getStocks,
             add: add,
             remove: remove,
-            get: get
+            get: get,
+            list: []
         };
 
         /**
@@ -28,8 +29,6 @@
          */
         var stockSymbols = ['AAPL', 'YHOO', 'GOOG', 'MSFT'];
 
-        activate();
-
         return service;
 
         ////////////////
@@ -41,27 +40,41 @@
         function add(stockSymbol) {
             stockSymbols.push(stockSymbol);
             settingsService.set('stockSymbols', JSON.stringify(stockSymbols));
+            getStocks();
         }
 
         function remove(stockSymbol) {
             stockSymbols.splice(stockSymbols.indexOf(stockSymbol), 1);
             settingsService.set('stockSymbols', JSON.stringify(stockSymbols));
+            getStocks();
         }
 
         function getStocks() {
             var defer = $q.defer();
 
-            $http.get(buildQuery(stockSymbols))
-                .then(function(result) {
-                    if (result.status === 200) {
-                        defer.resolve(processData(result.data));
-                    } else {
-                        defer.reject('request to YQL failed');
-                    }
-                }, function(error) {
-                    defer.reject(error);
-                });
+            settingsService.get('stockSymbols').then(function(symbols) {
 
+                if (!symbols) {
+                    symbols = stockSymbols;
+                }
+
+                console.log(symbols);
+
+                $http.get(buildQuery(symbols))
+                    .then(function(result) {
+                        if (result.status === 200) {
+                            var data = processData(result.data);
+
+                            service.list = data;
+                            console.log(service.list);
+                            defer.resolve(service.list);
+                        } else {
+                            defer.reject('request to YQL failed');
+                        }
+                    }, function(error) {
+                        defer.reject(error);
+                    });
+            });
 
             return defer.promise;
         }
@@ -93,17 +106,6 @@
         function buildQuery(symbols) {
             symbols = JSON.stringify(symbols).replace(/\[|]/g, '');
             return serviceUrl + '?q=' + encodeURIComponent('select * from yahoo.finance.quotes where symbol in (' + symbols + ')') + "&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json";
-        }
-
-        /**
-         * check settings for saved stocks
-         */
-        function activate() {
-            settingsService.get('stockSymbols').then(function(stocks) {
-                if (stocks) {
-                    stockSymbols = JSON.parse(stocks);
-                }
-            });
         }
     }
 })();

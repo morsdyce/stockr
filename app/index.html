@@ -2,11 +2,13 @@
 <html ng-app="stockr">
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>Stockr</title>
-
     <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
+
+<ui-view></ui-view>
 
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
@@ -15,6 +17,7 @@
 <script src="lib/angular-material/angular-material.js"></script>
 
 <script src="js/app.mdl.js"></script>
+<script src="js/states/router.mdl.js"></script>
 
 </body>
 </html>

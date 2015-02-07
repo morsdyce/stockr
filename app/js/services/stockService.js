@@ -40,21 +40,21 @@
 
         function add(stockSymbol) {
             stockSymbols.push(stockSymbol);
+            settingsService.set('stockSymbols', JSON.stringify(stockSymbols));
         }
 
         function remove(stockSymbol) {
             stockSymbols.splice(stockSymbols.indexOf(stockSymbol), 1);
+            settingsService.set('stockSymbols', JSON.stringify(stockSymbols));
         }
 
-        function getStocks(startDate, endDate) {
+        function getStocks() {
             var defer = $q.defer();
 
-            console.log(stockSymbols);
-            $http.get(buildQuery(stockSymbols, startDate, endDate))
+            $http.get(buildQuery(stockSymbols))
                 .then(function(result) {
-                    console.log(result.data);
                     if (result.status === 200) {
-                        defer.resolve(result.data);
+                        defer.resolve(processData(result.data));
                     } else {
                         defer.reject('request to YQL failed');
                     }
@@ -66,15 +66,33 @@
             return defer.promise;
         }
 
+        function processData(data) {
+            if (!data) {
+                return;
+            }
+
+            return data.query.results.quote.map(function(item) {
+               return {
+                   change: item.Change,
+                   changeInPercent: item.ChangeinPercent,
+                   stockExchange: item.StockExchange,
+                   symbol: item.Symbol,
+                   name: item.Name,
+                   lastTradeTime: item.LastTradeTime,
+                   price: item.LastTradePriceOnly
+               }
+            });
+        }
+
         /**
          * Build a query to get stock quotes from YQL
+         * Compromise: a hacky way to get the correct syntax out of an array for yql
          * @param symbols - an array of stock symbols
-         * @param startDate - start date in the following format: yyyy-mm-dd
-         * @param endDate - end date in the following format: yyyy-mm-dd
          * @returns {string}
          */
-        function buildQuery(symbols, startDate, endDate) {
-            return serviceUrl + '?q=' + encodeURIComponent('select * from yahoo.finance.historicaldata where symbol in (' + symbols.join(',') + ') and startDate = "' + startDate + '" and endDate = "' + endDate + '"') + "&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json";
+        function buildQuery(symbols) {
+            symbols = JSON.stringify(symbols).replace(/\[|]/g, '');
+            return serviceUrl + '?q=' + encodeURIComponent('select * from yahoo.finance.quotes where symbol in (' + symbols + ')') + "&env=http%3A%2F%2Fdatatables.org%2Falltables.env&format=json";
         }
 
         /**

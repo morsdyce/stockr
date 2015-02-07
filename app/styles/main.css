@@ -29,6 +29,8 @@ html {
     color: #000; }
   .stock-details .stock-shares {
     font-weight: 700; }
+  .stock-details .stock-extra-details {
+    min-width: 292px; }
 
 .stock-actions {
   margin: 3em 1em; }

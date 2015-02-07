@@ -2,7 +2,7 @@
     <md-toolbar scroll-shrink layout="row">
         <div class="md-toolbar-tools">
             <h3>
-                <span>Stockr</span>
+                <span>Stockr {{ dashboard.hello }}</span>
             </h3>
         </div>
     </md-toolbar>
@@ -63,27 +63,27 @@
         <div layout="row" layout-padding>
             <md-input-container flex>
                 <label>Search</label>
-                <input>
+                <input ng-model="dashboard.search">
             </md-input-container>
         </div>
         <div layout="row">
             <md-content>
                 <md-list layout="row" layout-wrap>
-                    <md-item>
+                    <md-item ng-repeat="stock in dashboard.stocks | filter:dashboard.search track by stock.symbol">
                         <md-card layout-padding>
                             <md-content layout="row">
                                 <div class="stock-details">
-                                    <p class="stock-company-name">Yahoo! Inc.</p>
+                                    <p class="stock-company-name">{{ ::stock.name }}</p>
 
-                                    <p>
-                                        <span>NASDAQ</span>
-                                        <span>YHOO</span>
-                                        <span>Feb 6 4:07 PM ET</span>
+                                    <p class="stock-extra-details">
+                                        <span>{{ ::stock.stockExchange }}</span>
+                                        <span>{{ ::stock.symbol }}</span>
+                                        <span>{{ ::dashboard.yesterday }} {{ ::stock.lastTradeTime }}</span>
                                     </p>
 
                                     <p>
-                                        <span class="stock-price">42.94</span>
-                                        <span class="stock-change">0.60 (1.39%)</span>
+                                        <span class="stock-price">{{ ::stock.price }}</span>
+                                        <span class="stock-change">{{ ::stock.change }} ({{ ::stock.changeInPercent}})</span>
                                     </p>
 
                                     <p class="stock-shares">
@@ -104,76 +104,6 @@
                             </md-content>
                         </md-card>
                     </md-item>
-                    <md-item>
-                        <md-card layout-padding>
-                            <md-content layout="row">
-                                <div class="stock-details">
-                                    <p class="stock-company-name">Yahoo! Inc.</p>
-
-                                    <p>
-                                        <span>NASDAQ</span>
-                                        <span>YHOO</span>
-                                        <span>Feb 6 4:07 PM ET</span>
-                                    </p>
-
-                                    <p>
-                                        <span class="stock-price">42.94</span>
-                                        <span class="stock-change">0.60 (1.39%)</span>
-                                    </p>
-
-                                    <p class="stock-shares">
-                                        50 Shares
-                                    </p>
-                                </div>
-                                <div layout-align="center center" layout="row" class="stock-actions">
-                                    <md-button class="md-raised md-primary">Buy</md-button>
-                                    <md-button class="md-raised">Sell</md-button>
-                                </div>
-
-                                <div layout-align="end start">
-                                    <a href="#">
-                                        <md-icon icon="lib/material-design-icons/action/svg/production/ic_highlight_remove_24px.svg"
-                                                 style="width: 24px; height: 24px;"></md-icon>
-                                    </a>
-                                </div>
-                            </md-content>
-                        </md-card>
-                    </md-item>
-                    <md-item>
-                        <md-card layout-padding>
-                            <md-content layout="row">
-                                <div class="stock-details">
-                                    <p class="stock-company-name">Yahoo! Inc.</p>
-
-                                    <p>
-                                        <span>NASDAQ</span>
-                                        <span>YHOO</span>
-                                        <span>Feb 6 4:07 PM ET</span>
-                                    </p>
-
-                                    <p>
-                                        <span class="stock-price">42.94</span>
-                                        <span class="stock-change">0.60 (1.39%)</span>
-                                    </p>
-
-                                    <p class="stock-shares">
-                                        50 Shares
-                                    </p>
-                                </div>
-                                <div layout-align="center center" layout="row" class="stock-actions">
-                                    <md-button class="md-raised md-primary">Buy</md-button>
-                                    <md-button class="md-raised">Sell</md-button>
-                                </div>
-
-                                <div layout-align="end start">
-                                    <a href="#">
-                                        <md-icon icon="lib/material-design-icons/action/svg/production/ic_highlight_remove_24px.svg"
-                                                 style="width: 24px; height: 24px;"></md-icon>
-                                    </a>
-                                </div>
-                            </md-content>
-                        </md-card>
-                    </md-item>
                 </md-list>
             </md-content>
         </div>
@@ -181,7 +111,7 @@
 </div>
 
 <!-- FAB POPUP -->
-<div id="fab-popup" layout="column" layout-align="space-between"
+<div id="fab-popup" layout="column" layout-align="space-between" ng-if="false"
      ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
     <md-button class="md-fab md-raised" ng-click="openDialog($event);" aria-label="New document">
         <md-icon icon="lib/material-design-icons/editor/svg/production/ic_attach_money_24px.svg"

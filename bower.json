@@ -1,0 +1,26 @@
+{
+  "name": "stockr",
+  "version": "0.0.0",
+  "authors": [
+    "Maayan Glikser <maayan@glikm.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "~0.7.1",
+    "angular": "~1.3.12",
+    "angular-animate": "~1.3.12",
+    "angular-aria": "~1.3.12",
+    "angular-mocks": "~1.3.12",
+    "angular-ui-router": "~0.2.13",
+    "normalize.css": "~3.0.2"
+  }
+}

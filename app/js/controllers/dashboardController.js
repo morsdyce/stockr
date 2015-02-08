@@ -5,10 +5,10 @@
         .module('stockr')
         .controller('dashboardController', dashboardController);
 
-    dashboardController.$inject = ['stockService', 'balanceService'];
+    dashboardController.$inject = ['stockService', 'balanceService', '$scope'];
 
     /* @ngInject */
-    function dashboardController(stockService, balanceService) {
+    function dashboardController(stockService, balanceService, $scope) {
         /* jshint validthis: true */
         var vm = this;
 
@@ -17,6 +17,7 @@
         vm.removeStock = removeStock;
         vm.addStock = addStock;
         vm.stocks = [];
+        vm.netWorth = 0;
         vm.finance = balanceService.data;
         vm.getBalance = balanceService.getBalance;
         vm.totalShares = balanceService.getTotalShares;
@@ -31,10 +32,12 @@
 
         function activate() {
             getStocks();
+            watchBalanceAndShares();
+            updateNetWorth();
         }
 
         function getStocks() {
-            stockService.getStocks().then(function(stocks) {
+            stockService.getStocks().then(function (stocks) {
                 vm.stocks = stocks;
                 return vm.stocks;
             });
@@ -48,6 +51,28 @@
         function addStock(stockSymbol) {
             stockService.add(stockSymbol);
             getStocks();
+        }
+
+        /*
+         *   Compromise: Assume whenever balance is changed net worth should be changed as well
+         *   Normally I would set up proper bindings to propagate the changes
+         */
+        function watchBalanceAndShares() {
+            $scope.$watch(function () {
+                return vm.getBalance();
+            }, function (newValue, oldValue) {
+                if (newValue === oldValue) {
+                    return;
+                }
+
+                updateNetWorth();
+            });
+        }
+
+        function updateNetWorth() {
+            balanceService.getNetWorth().then(function (result) {
+                vm.netWorth = result;
+            });
         }
     }
 })();

@@ -88,7 +88,7 @@
                    symbol: item.Symbol,
                    name: item.Name,
                    lastTradeTime: item.LastTradeTime,
-                   price: item.LastTradePriceOnly
+                   price: parseFloat(item.LastTradePriceOnly)
                }
             });
         }

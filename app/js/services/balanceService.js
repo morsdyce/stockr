@@ -5,10 +5,10 @@
         .module('stockr')
         .factory('balanceService', balanceService);
 
-    balanceService.$inject = ['settingsService', 'stockService'];
+    balanceService.$inject = ['settingsService', 'stockService', '$q'];
 
     /* @ngInject */
-    function balanceService(settingsService, stockService) {
+    function balanceService(settingsService, stockService, $q) {
 
         var data = {
             balance: 0,
@@ -23,6 +23,7 @@
             getTotalShares: getTotalShares,
             getStockShares: getStockShares,
             getBalance: getBalance,
+            getNetWorth: getNetWorth,
             data: data
         };
 
@@ -52,9 +53,9 @@
                 amount = parseFloat(amount);
             }
 
-            var stock = getStock();
+            var stock = getStock(symbol);
 
-            if (stock ) {
+            if (stock) {
                 stock.shares += amount;
             } else {
                 data.stocks.push({
@@ -106,9 +107,25 @@
         }
 
         function getNetWorth() {
-            stockService.getStocks().then(function() {
 
+            var defer = $q.defer();
+
+            stockService.getStocks().then(function(stocks) {
+                var amount = stocks.map(function(stockData) {
+                   var stock = getStock(stockData.symbol);
+                    if (stock) {
+                        return stock.shares * stockData.price;
+                    }
+                    return 0;
+                }).reduce(function(x, y) {
+                    return x + y;
+                });
+                defer.resolve(amount);
+            }, function(error) {
+                defer.reject(error);
             });
+
+            return defer.promise;
         }
 
         function getStock(symbol) {
@@ -129,7 +146,9 @@
 
         function activate() {
             settingsService.get('balance').then(function(result) {
-               data = JSON.parse(result);
+                if (result) {
+                    data = JSON.parse(result);
+                }
             });
         }
     }

@@ -1,0 +1,17 @@
+<md-dialog>
+    <md-content>
+        Add a stock
+        <md-input-container>
+            <label>Stock</label>
+            <input ng-model="addDialog.stock">
+        </md-input-container>
+    </md-content>
+    <div class="md-actions">
+        <md-button ng-click="addDialog.addStock()">
+            Add
+        </md-button>
+        <md-button ng-click="addDialog.closeDialog()">
+            Close
+        </md-button>
+    </div>
+</md-dialog>

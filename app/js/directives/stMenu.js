@@ -3,38 +3,66 @@
 
     angular
         .module('stockr')
-        .directive('stMenu', stMenu);
+        .directive('stMenu', stMenu)
+        .controller('stMenuController', stMenuController);
 
-    stMenu.$inject = ['$mdDialog'];
+    stMenuController.$inject = ['$mdDialog'];
 
     /* @ngInject */
-    function stMenu($mdDialog) {
+    function stMenu() {
         var directive = {
             link: link,
             restrict: 'E',
             templateUrl: 'views/stMenuDirective.html',
-            controllerAs: 'stMenuController as menu'
+            controller: 'stMenuController',
+            controllerAs: 'stMenu',
+            bindToController: true
         };
         return directive;
 
         function link(scope, element, attrs) {
 
-            scope.openDialog = function(dialogName, $event) {
+            //scope.openDialog = function(dialogName, $event) {
+            //
+            //    $mdDialog.show({
+            //        targetEvent: $event,
+            //        template:
+            //        '<md-dialog>' +
+            //        '  <md-content>Hello!</md-content>' +
+            //        '  <div class="md-actions">' +
+            //        '    <md-button ng-click="closeDialog()">' +
+            //        '      Close Greeting' +
+            //        '    </md-button>' +
+            //        '  </div>' +
+            //        '</md-dialog>',
+            //        controller: 'testController'
+            //    });
+            //}
+        }
+    }
 
+    function stMenuController($mdDialog) {
+        var vm = this;
+
+        vm.openDialog = function(dialogName, $event) {
+
+            if (dialogName === 'add') {
                 $mdDialog.show({
                     targetEvent: $event,
-                    template:
-                    '<md-dialog>' +
-                    '  <md-content>Hello!</md-content>' +
-                    '  <div class="md-actions">' +
-                    '    <md-button ng-click="closeDialog()">' +
-                    '      Close Greeting' +
-                    '    </md-button>' +
-                    '  </div>' +
-                    '</md-dialog>',
-                    controller: 'testController'
+                    templateUrl: 'views/_addDialog.html',
+                    controller: 'addDialogController',
+                    controllerAs: 'addDialog'
                 });
             }
+
+            if (dialogName === 'balance') {
+
+            }
+
+            if (dialogName === 'news') {
+
+            }
         }
+
     }
 })();

@@ -1,21 +1,21 @@
 <!-- FAB POPUP -->
 <div id="fab-popup" layout="column" layout-align="space-between" ng-if="showMenu"
      ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
-    <md-button class="md-fab md-raised" ng-click="openDialog('balance', $event);" aria-label="New document">
+    <md-button class="md-fab md-raised" ng-click="stMenu.openDialog('balance', $event);" aria-label="New document">
         <md-icon icon="lib/material-design-icons/editor/svg/production/ic_attach_money_24px.svg"
                  style="width: 24px; height: 24px;"></md-icon>
         <md-tooltip>
             Change Balance
         </md-tooltip>
     </md-button>
-    <md-button class="md-fab md-raised" ng-click="openDialog('news', $event);" aria-label="New document">
+    <md-button class="md-fab md-raised" ng-click="stMenu.openDialog('news', $event);" aria-label="New document">
         <md-icon icon="lib/material-design-icons/social/svg/production/ic_public_24px.svg"
                  style="width: 24px; height: 24px;"></md-icon>
         <md-tooltip>
             Stock News
         </md-tooltip>
     </md-button>
-    <md-button class="md-fab md-raised" ng-click="openDialog('add', $event);" aria-label="New document">
+    <md-button class="md-fab md-raised" ng-click="stMenu.openDialog('add', $event);" aria-label="New document">
         <md-icon icon="lib/material-design-icons/content/svg/production/ic_add_24px.svg"
                  style="width: 24px; height: 24px;"></md-icon>
         <md-tooltip>

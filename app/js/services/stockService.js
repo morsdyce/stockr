@@ -62,9 +62,7 @@
                     .then(function(result) {
                         if (result.status === 200) {
                             var data = processData(result.data);
-
                             service.list = data;
-                            console.log(service.list);
                             defer.resolve(service.list);
                         } else {
                             defer.reject('request to YQL failed');

@@ -5,10 +5,10 @@
         .module('stockr')
         .factory('balanceService', balanceService);
 
-    balanceService.$inject = ['settingsService'];
+    balanceService.$inject = ['settingsService', 'stockService'];
 
     /* @ngInject */
-    function balanceService(settingsService) {
+    function balanceService(settingsService, stockService) {
 
         var data = {
             balance: 0,
@@ -24,6 +24,8 @@
             getStockShares: getStockShares,
             data: data
         };
+
+        activate();
 
         return service;
 
@@ -59,6 +61,8 @@
                    shares: amount
                 });
             }
+
+            save();
         }
 
         function removeShare(symbol, amount) {
@@ -76,6 +80,8 @@
                     stock.shares = 0;
                 }
             }
+
+            save();
         }
 
         function getTotalShares() {

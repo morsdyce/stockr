@@ -19,6 +19,7 @@
         vm.stocks = [];
         vm.finance = balanceService.data;
         vm.totalShares = balanceService.getTotalShares;
+        vm.getStockShares = balanceService.getStockShares;
 
         // set a fixed date since we're only previewing for yesterday.
         vm.yesterday = moment().subtract(1, 'days').format('MMM Do YYYY');

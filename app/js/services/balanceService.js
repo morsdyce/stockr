@@ -21,6 +21,7 @@
             addShare: addShare,
             removeShare: removeShare,
             getTotalShares: getTotalShares,
+            getStockShares: getStockShares,
             data: data
         };
 
@@ -43,6 +44,11 @@
         }
 
         function addShare(symbol, amount) {
+
+            if (!angular.isNumber(amount)) {
+                amount = parseFloat(amount);
+            }
+
             var stock = getStock();
 
             if (stock ) {
@@ -56,6 +62,11 @@
         }
 
         function removeShare(symbol, amount) {
+
+            if (!angular.isNumber(amount)) {
+                amount = parseFloat(amount);
+            }
+
             var stock = getStock(symbol);
 
             if (stock) {
@@ -73,6 +84,16 @@
             }).reduce(function(x, y) {
                 return x + y;
             }, 0);
+        }
+
+        function getStockShares(symbol) {
+            var stock = getStock(symbol);
+
+            if (stock) {
+                return stock.shares;
+            }
+
+            return 0;
         }
 
         function getStock(symbol) {

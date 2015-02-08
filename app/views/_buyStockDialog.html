@@ -1,0 +1,17 @@
+<md-dialog>
+    <md-content>
+        Buy shares
+        <md-input-container>
+            <label>Share quantity</label>
+            <input ng-model="stockDialog.amount">
+        </md-input-container>
+    </md-content>
+    <div class="md-actions">
+        <md-button ng-click="stockDialog.buyStock()">
+            Buy
+        </md-button>
+        <md-button ng-click="stockDialog.closeDialog()">
+            Close
+        </md-button>
+    </div>
+</md-dialog>

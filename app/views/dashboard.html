@@ -41,7 +41,7 @@
                     <md-item>
                         <md-item-content>
                             <div class="md-tile-content">
-                                <span>Balance: {{ dashboard.finance.balance }}</span>
+                                <span>Balance: {{ dashboard.finance.balance | currency:'$':0 }}</span>
                             </div>
                         </md-item-content>
                         <md-divider></md-divider>
@@ -87,12 +87,12 @@
                                     </p>
 
                                     <p class="stock-shares">
-                                        50 Shares
+                                        {{ dashboard.getStockShares(stock.symbol) }} Shares
                                     </p>
                                 </div>
                                 <div layout-align="center center" layout="row" class="stock-actions">
-                                    <md-button class="md-raised md-primary">Buy</md-button>
-                                    <md-button class="md-raised">Sell</md-button>
+                                    <md-button class="md-raised md-primary" stock-button="buy" stock-symbol="{{ ::stock.symbol }}" stock-price="{{ ::stock.price }}">Buy</md-button>
+                                    <md-button class="md-raised" stock-button="sell" stock-symbol="{{ ::stock.symbol }}" stock-price="{{ ::stock.price }}">Sell</md-button>
                                 </div>
                                 <div layout-align="end start">
                                     <a href="" ng-click="dashboard.removeStock(stock.symbol)">

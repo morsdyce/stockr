@@ -19,7 +19,7 @@
     "karma-phantomjs-launcher": "~0.1"
   },
   "scripts": {
-    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
+    "test": "./node_modules/.bin/karma start --single-run"
   },
   "author": "Maayan Glikser <maayan@glikm.com>",
   "license": "MIT"

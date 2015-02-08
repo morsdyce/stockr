@@ -29,6 +29,11 @@
         ////////////////
 
         function addBalance(amount) {
+
+            if (!angular.isNumber(amount)) {
+                amount = parseFloat(amount);
+            }
+
             data.balance += amount;
             save();
         }

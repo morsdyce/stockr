@@ -56,7 +56,12 @@
             }
 
             if (dialogName === 'balance') {
-
+                $mdDialog.show({
+                    targetEvent: $event,
+                    templateUrl: 'views/_balanceDialog.html',
+                    controller: 'balanceDialogController',
+                    controllerAs: 'balanceDialog'
+                });
             }
 
             if (dialogName === 'news') {

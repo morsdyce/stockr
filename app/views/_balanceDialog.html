@@ -1,0 +1,21 @@
+<md-dialog>
+    <md-content>
+        Change Balance
+        <md-input-container>
+            <label>Amount</label>
+            <input ng-model="balanceDialog.amount">
+        </md-input-container>
+        <md-radio-group ng-model="balanceDialog.action">
+            <md-radio-button value="addBalance" aria-label="Add">Add</md-radio-button>
+            <md-radio-button value="removeBalance" aria-label="Subtract">Subtract</md-radio-button>
+        </md-radio-group>
+    </md-content>
+    <div class="md-actions">
+        <md-button ng-click="balanceDialog.changeBalance()">
+            Change
+        </md-button>
+        <md-button ng-click="balanceDialog.closeDialog()">
+            Close
+        </md-button>
+    </div>
+</md-dialog>

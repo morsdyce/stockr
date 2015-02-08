@@ -22,6 +22,7 @@
             removeShare: removeShare,
             getTotalShares: getTotalShares,
             getStockShares: getStockShares,
+            getBalance: getBalance,
             data: data
         };
 
@@ -61,7 +62,6 @@
                    shares: amount
                 });
             }
-
             save();
         }
 
@@ -80,7 +80,6 @@
                     stock.shares = 0;
                 }
             }
-
             save();
         }
 
@@ -100,6 +99,16 @@
             }
 
             return 0;
+        }
+
+        function getBalance() {
+            return data.balance;
+        }
+
+        function getNetWorth() {
+            stockService.getStocks().then(function() {
+
+            });
         }
 
         function getStock(symbol) {

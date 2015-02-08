@@ -18,6 +18,7 @@
         vm.addStock = addStock;
         vm.stocks = [];
         vm.finance = balanceService.data;
+        vm.getBalance = balanceService.getBalance;
         vm.totalShares = balanceService.getTotalShares;
         vm.getStockShares = balanceService.getStockShares;
 

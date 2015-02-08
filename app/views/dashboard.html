@@ -41,7 +41,7 @@
                     <md-item>
                         <md-item-content>
                             <div class="md-tile-content">
-                                <span>Balance:</span> <span ng-class="{red: dashboard.finance.balance < 0, green: dashboard.finance.balance > 0}">{{ dashboard.finance.balance | currency:'$':0 }}</span>
+                                <span>Balance:</span> <span ng-class="{red: dashboard.getBalance() < 0, green: dashboard.getBalance() > 0}">{{ dashboard.getBalance() | currency:'$':0 }}</span>
                             </div>
                         </md-item-content>
                         <md-divider></md-divider>

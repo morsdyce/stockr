@@ -33,7 +33,7 @@
                     <md-item>
                         <md-item-content>
                             <div class="md-tile-content">
-                                <span>Net Worth: 50K</span>
+                                <span>Net Worth: {{ news.netWorth | currency:'$':0 }}</span>
                             </div>
                         </md-item-content>
                         <md-divider></md-divider>
@@ -41,7 +41,7 @@
                     <md-item>
                         <md-item-content>
                             <div class="md-tile-content">
-                                <span>Balance: {{ news.finance.balance }}</span>
+                                <span>Balance:</span> <span ng-class="{red: news.getBalance() < 0, green: news.getBalance() > 0}">{{ news.getBalance() | currency:'$':0 }}</span>
                             </div>
                         </md-item-content>
                         <md-divider></md-divider>

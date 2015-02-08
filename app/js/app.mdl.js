@@ -21,7 +21,7 @@
             .state('news', {
                 url: '/news',
                 templateUrl: 'views/news.html',
-                controller: 'newsController as news'
+                controller: 'dashboardController as news'
             });
 
 

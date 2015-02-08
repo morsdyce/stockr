@@ -17,6 +17,11 @@
                 url: '/',
                 templateUrl: 'views/dashboard.html',
                 controller: 'dashboardController as dashboard'
+            })
+            .state('news', {
+                url: '/news',
+                templateUrl: 'views/news.html',
+                controller: 'newsController as news'
             });
 
 

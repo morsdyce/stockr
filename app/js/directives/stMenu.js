@@ -6,7 +6,7 @@
         .directive('stMenu', stMenu)
         .controller('stMenuController', stMenuController);
 
-    stMenuController.$inject = ['$mdDialog'];
+    stMenuController.$inject = ['$mdDialog', '$location'];
 
     /* @ngInject */
     function stMenu() {
@@ -21,27 +21,10 @@
         return directive;
 
         function link(scope, element, attrs) {
-
-            //scope.openDialog = function(dialogName, $event) {
-            //
-            //    $mdDialog.show({
-            //        targetEvent: $event,
-            //        template:
-            //        '<md-dialog>' +
-            //        '  <md-content>Hello!</md-content>' +
-            //        '  <div class="md-actions">' +
-            //        '    <md-button ng-click="closeDialog()">' +
-            //        '      Close Greeting' +
-            //        '    </md-button>' +
-            //        '  </div>' +
-            //        '</md-dialog>',
-            //        controller: 'testController'
-            //    });
-            //}
         }
     }
 
-    function stMenuController($mdDialog) {
+    function stMenuController($mdDialog, $location) {
         var vm = this;
 
         vm.openDialog = function(dialogName, $event) {
@@ -65,7 +48,7 @@
             }
 
             if (dialogName === 'news') {
-
+                $location.url('news');
             }
         }
 

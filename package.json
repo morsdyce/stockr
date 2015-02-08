@@ -1,0 +1,26 @@
+{
+  "name": "stockr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "browser-sync": "^2.0.0-rc8",
+    "gulp": "^3.8.10"
+  },
+  "devDependencies": {
+    "karma": "^0.12.23",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-cli": "^0.0.4",
+    "karma-jasmine": "^0.1.5",
+    "karma-jasmine-jquery": "^0.1.0",
+    "karma-phantomjs-launcher": "~0.1"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
+  },
+  "author": "Maayan Glikser <maayan@glikm.com>",
+  "license": "MIT"
+}

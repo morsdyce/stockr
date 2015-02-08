@@ -15,8 +15,7 @@
             restrict: 'E',
             templateUrl: 'views/stMenuDirective.html',
             controller: 'stMenuController',
-            controllerAs: 'stMenu',
-            bindToController: true
+            controllerAs: 'stMenu'
         };
         return directive;
 

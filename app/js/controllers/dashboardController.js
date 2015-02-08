@@ -5,10 +5,10 @@
         .module('stockr')
         .controller('dashboardController', dashboardController);
 
-    dashboardController.$inject = ['stockService', '$scope'];
+    dashboardController.$inject = ['stockService', 'balanceService'];
 
     /* @ngInject */
-    function dashboardController(stockService, $scope) {
+    function dashboardController(stockService, balanceService) {
         /* jshint validthis: true */
         var vm = this;
 
@@ -17,6 +17,8 @@
         vm.removeStock = removeStock;
         vm.addStock = addStock;
         vm.stocks = [];
+        vm.finance = balanceService.data;
+        vm.totalShares = balanceService.getTotalShares;
 
         // set a fixed date since we're only previewing for yesterday.
         vm.yesterday = moment().subtract(1, 'days').format('MMM Do YYYY');
@@ -31,7 +33,6 @@
 
         function getStocks() {
             stockService.getStocks().then(function(stocks) {
-                console.log(stocks);
                 vm.stocks = stocks;
                 return vm.stocks;
             });

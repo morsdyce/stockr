@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    describe('Settings Service', function() {
+    describe('Stock Service', function() {
 
         var _stockService, _rootScope, _httpBackend;
 

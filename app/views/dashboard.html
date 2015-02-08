@@ -41,7 +41,7 @@
                     <md-item>
                         <md-item-content>
                             <div class="md-tile-content">
-                                <span>Balance: 50K</span>
+                                <span>Balance: {{ dashboard.finance.balance }}</span>
                             </div>
                         </md-item-content>
                         <md-divider></md-divider>
@@ -49,7 +49,7 @@
                     <md-item>
                         <md-item-content>
                             <div class="md-tile-content">
-                                <span>Total Shares: 50</span>
+                                <span>Total Shares: {{ dashboard.totalShares() }}</span>
                             </div>
                         </md-item-content>
                     </md-item>
@@ -110,33 +110,4 @@
     </div>
 </div>
 
-<!-- FAB POPUP -->
-<div id="fab-popup" layout="column" layout-align="space-between" ng-if="false"
-     ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
-    <md-button class="md-fab md-raised" ng-click="openDialog($event);" aria-label="New document">
-        <md-icon icon="lib/material-design-icons/editor/svg/production/ic_attach_money_24px.svg"
-                 style="width: 24px; height: 24px;"></md-icon>
-        <md-tooltip>
-            Change Balance
-        </md-tooltip>
-    </md-button>
-    <md-button class="md-fab md-raised" ng-click="openDialog($event);" aria-label="New document">
-        <md-icon icon="lib/material-design-icons/social/svg/production/ic_public_24px.svg"
-                 style="width: 24px; height: 24px;"></md-icon>
-        <md-tooltip>
-            Stock News
-        </md-tooltip>
-    </md-button>
-    <md-button class="md-fab md-raised" ng-click="openDialog($event);" aria-label="New document">
-        <md-icon icon="lib/material-design-icons/content/svg/production/ic_add_24px.svg"
-                 style="width: 24px; height: 24px;"></md-icon>
-        <md-tooltip>
-            Track a stock
-        </md-tooltip>
-    </md-button>
-</div>
-
-<md-button class="md-fab action-button" aria-label="Actions">
-    <md-icon icon="lib/material-design-icons/navigation/svg/production/ic_menu_24px.svg"
-             style="width: 24px; height: 24px;"></md-icon>
-</md-button>
+<st-menu></st-menu>

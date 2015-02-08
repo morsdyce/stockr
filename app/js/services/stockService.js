@@ -58,8 +58,6 @@
                     symbols = stockSymbols;
                 }
 
-                console.log(symbols);
-
                 $http.get(buildQuery(symbols))
                     .then(function(result) {
                         if (result.status === 200) {

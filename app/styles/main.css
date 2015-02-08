@@ -23,8 +23,7 @@ html {
     font-size: 36px;
     color: #000; }
   .stock-details .stock-change {
-    font-size: 25px;
-    color: #c00; }
+    font-size: 25px; }
   .stock-details .stock-date {
     color: #000; }
   .stock-details .stock-shares {
@@ -49,6 +48,16 @@ html {
   position: fixed;
   right: 2%;
   bottom: 90px; }
+
+/*
+  Compromise: add !important to override existing styling colors
+  instead of actually fixing style priorities
+*/
+.red {
+  color: #db4437 !important; }
+
+.green {
+  color: #00AA00 !important; }
 
 .animate-if {
   background: white;

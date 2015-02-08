@@ -41,7 +41,7 @@
                     <md-item>
                         <md-item-content>
                             <div class="md-tile-content">
-                                <span>Balance: {{ dashboard.finance.balance | currency:'$':0 }}</span>
+                                <span>Balance:</span> <span ng-class="{red: dashboard.finance.balance < 0, green: dashboard.finance.balance > 0}">{{ dashboard.finance.balance | currency:'$':0 }}</span>
                             </div>
                         </md-item-content>
                         <md-divider></md-divider>
@@ -83,7 +83,7 @@
 
                                     <p>
                                         <span class="stock-price">{{ ::stock.price }}</span>
-                                        <span class="stock-change">{{ ::stock.change }} ({{ ::stock.changeInPercent}})</span>
+                                        <span class="stock-change" ng-class="{red: stock.change.indexOf('-') !== -1, green: stock.change.indexOf('+') !== -1}">{{ ::stock.change }} ({{ ::stock.changeInPercent}})</span>
                                     </p>
 
                                     <p class="stock-shares">

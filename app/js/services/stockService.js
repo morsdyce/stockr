@@ -46,7 +46,6 @@
         function remove(stockSymbol) {
             stockSymbols.splice(stockSymbols.indexOf(stockSymbol), 1);
             settingsService.set('stockSymbols', JSON.stringify(stockSymbols));
-            getStocks();
         }
 
         function getStocks() {

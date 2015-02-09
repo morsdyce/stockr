@@ -82,7 +82,7 @@
                                     </p>
 
                                     <p>
-                                        <span class="stock-price">{{ ::stock.price }}</span>
+                                        <span class="stock-price">{{ ::stock.price | number:2 }}</span>
                                         <!-- compromise: check against + and - signs instead of converting to numbers and checking if positive or negative. as well as creating a custom directive for this situation -->
                                         <span class="stock-change" ng-class="{red: stock.change.indexOf('-') !== -1, green: stock.change.indexOf('+') !== -1}">{{ ::stock.change }} ({{ ::stock.changeInPercent}})</span>
                                     </p>

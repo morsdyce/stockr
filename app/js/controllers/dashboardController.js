@@ -38,8 +38,8 @@
 
         function getStocks() {
             stockService.getStocks().then(function (stocks) {
+                console.log(vm.stocks);
                 vm.stocks = stocks;
-                return vm.stocks;
             });
         }
 
